@@ -19,11 +19,6 @@ include 'constants.php';
 
     <link rel="stylesheet" type="text/css" href="library/font-awesome-4.3.0/css/font-awesome.min.css">
 
-
-    <!-- [ PLUGIN STYLESHEET ]
-        
-=========================================================================================================================-->
-
     <link rel="shortcut icon" type="image/x-icon" href="images/icon.png">
 
     <link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -133,10 +128,6 @@ include 'constants.php';
                         <li><a href="pro/signin.php" class="page-scroll">
                                 <h3>Passenger Portal</h3>
                             </a></li>
-
-                        <li><a href="pro/adminsignin.php" class="page-scroll">
-                                <h3>Admin</h3>
-                            </a></li>
                     </ul>
 
                 </div>
@@ -193,44 +184,10 @@ include 'constants.php';
 
         </section>
 
-        <section class="main-heading" id="home">
-
-            <div class="overlay">
-
-                <div class="container">
-
-                    <div class="row">
-
-                        <div class="main-heading-content col-md-12 col-sm-12 text-center">
-
-                            <h1 class="main-heading-title">Bussdown Express</h1>
-
-                            <p class="main-heading-text">Bussdown Express is a bus company , which offers online ticketing and payment services for their buses.
-
-                            <div class="btn-bar">
-
-                                <a href="system/" class="btn btn-custom theme_background_color">Get Started</a>
-
-                                <a href="system/admin" class="btn btn-custom-outline">Admin</a>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </section>
-
 
         <!-- [/MAIN-HEADING]
  
 ============================================================================================================================-->
-
 
 
         <!-- [ABOUT US]

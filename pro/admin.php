@@ -132,8 +132,8 @@ $fullname =  "System Administrator";
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a href="admin.php?page=train" class="nav-link      <?php
-                                                                                echo (@$_GET['page'] == 'train') ? 'active' : '';
+                            <a href="admin.php?page=bus" class="nav-link      <?php
+                                                                                echo (@$_GET['page'] == 'bus') ? 'active' : '';
                                                                                 ?>">
                                 <i class="nav-icon fas fa-train"></i>
                                 <p>

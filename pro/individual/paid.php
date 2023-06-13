@@ -79,7 +79,7 @@ if (isset($_GET['now'])) {
                                                         ?>
                                                 </p>
                                                 <p><b>Bus Name :</b>
-                                                    <?php echo getTrainName($row['train_id']);
+                                                    <?php echo getTrainName($row['bus_id']);
                                                         ?>
                                                 </p>
                                                 <p><b>Payment Date :</b>

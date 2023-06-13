@@ -30,7 +30,7 @@ if (!isset($file_access)) die("Direct File Access Denied");
                 <span class="info-box-icon"><i class="fa fa-train"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Trains</span>
+                    <span class="info-box-text">Busses</span>
                     <span class="info-box-number"><?php
                                                     echo $comp = $conn->query("SELECT * FROM train")->num_rows;
                                                     ?></span>

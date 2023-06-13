@@ -207,7 +207,7 @@ INSERT INTO `route` (`id`, `start`, `stop`) VALUES
 
 CREATE TABLE `schedule` (
   `id` int(11) NOT NULL,
-  `train_id` int(11) NOT NULL,
+  `bus_id` int(11) NOT NULL,
   `route_id` int(11) NOT NULL,
   `date` varchar(30) NOT NULL,
   `time` varchar(10) NOT NULL,
@@ -219,7 +219,7 @@ CREATE TABLE `schedule` (
 -- Dumping data for table `schedule`
 --
 
-INSERT INTO `schedule` (`id`, `train_id`, `route_id`, `date`, `time`, `first_fee`, `second_fee`) VALUES
+INSERT INTO `schedule` (`id`, `bus_id`, `route_id`, `date`, `time`, `first_fee`, `second_fee`) VALUES
 (5, 7, 7, '11-08-2022', '18:30', 180, 80),
 (6, 11, 6, '09-05-2022', '18:30', 200, 85),
 (7, 11, 5, '12-08-2020', '18:30', 130, 45),
@@ -339,7 +339,7 @@ ALTER TABLE `route`
 --
 ALTER TABLE `schedule`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `train_id` (`train_id`),
+  ADD KEY `bus_id` (`bus_id`),
   ADD KEY `route_id` (`route_id`);
 
 --
@@ -428,7 +428,7 @@ ALTER TABLE `payment`
 -- Constraints for table `schedule`
 --
 ALTER TABLE `schedule`
-  ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`train_id`) REFERENCES `train` (`id`),
+  ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`bus_id`) REFERENCES `train` (`id`),
   ADD CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`route_id`) REFERENCES `route` (`id`);
 COMMIT;
 

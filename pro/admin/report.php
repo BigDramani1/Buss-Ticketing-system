@@ -40,7 +40,7 @@ $me = "?page=$source"
                                         while ($fetch = $row->fetch_assoc()) {
                                             $id = $fetch['id']; ?><tr>
                                             <td><?php echo ++$sn; ?></td>
-                                            <td><?php echo getTrainName($fetch['train_id']); ?></td>
+                                            <td><?php echo getTrainName($fetch['bus_id']); ?></td>
                                             <td><?php echo getRoutePath($fetch['route_id']);
                                                     $fullname = " Schedule" ?></td>
 
@@ -88,8 +88,8 @@ $me = "?page=$source"
                 <form action="" method="post">
                     <div class="row">
                         <div class="col-sm-6">
-                            Train : <select class="form-control" name="train_id" required id="">
-                                <option value="">Select Train</option>
+                            Bus : <select class="form-control" name="bus_id" required id="">
+                                <option value="">Select Bus</option>
                                 <?php
                                 $con = connect()->query("SELECT * FROM train");
                                 while ($row = $con->fetch_assoc()) {
@@ -173,8 +173,8 @@ $me = "?page=$source"
                 <form action="" method="post">
                     <div class="row">
                         <div class="col-sm-6">
-                            Train : <select class="form-control" name="train_id" required id="">
-                                <option value="">Select Train</option>
+                            Bus : <select class="form-control" name="bus_id" required id="">
+                                <option value="">Select Bus</option>
                                 <?php
                                 $con = connect()->query("SELECT * FROM train");
                                 while ($row = $con->fetch_assoc()) {
@@ -261,7 +261,7 @@ $me = "?page=$source"
 
 if (isset($_POST['submit'])) {
     $route_id = $_POST['route_id'];
-    $train_id = $_POST['train_id'];
+    $bus_id = $_POST['bus_id'];
     $first_fee = $_POST['first_fee'];
     $second_fee = $_POST['second_fee'];
     $date = $_POST['date'];
@@ -269,12 +269,12 @@ if (isset($_POST['submit'])) {
     // die($date);
     // $endDate = date('Y-m-d' ,strtotime( $data['automatic_until'] ));
     $time = $_POST['time'];
-    if (!isset($route_id, $train_id, $first_fee, $second_fee, $date, $time)) {
+    if (!isset($route_id, $bus_id, $first_fee, $second_fee, $date, $time)) {
         alert("Fill Form Properly!");
     } else {
         $conn = connect();
-        $ins = $conn->prepare("INSERT INTO `schedule`(`train_id`, `route_id`, `date`, `time`, `first_fee`, `second_fee`) VALUES (?,?,?,?,?,?)");
-        $ins->bind_param("iissii", $train_id, $route_id, $date, $time, $first_fee, $second_fee);
+        $ins = $conn->prepare("INSERT INTO `schedule`(`bus_id`, `route_id`, `date`, `time`, `first_fee`, `second_fee`) VALUES (?,?,?,?,?,?)");
+        $ins->bind_param("iissii", $bus_id, $route_id, $date, $time, $first_fee, $second_fee);
         $ins->execute();
         alert("Schedule Added!");
         load($_SERVER['PHP_SELF'] . "$me");
@@ -284,7 +284,7 @@ if (isset($_POST['submit'])) {
 
 if (isset($_POST['submit2'])) {
     $route_id = $_POST['route_id'];
-    $train_id = $_POST['train_id'];
+    $bus_id = $_POST['bus_id'];
     $first_fee = $_POST['first_fee'];
     $second_fee = $_POST['second_fee'];
     $from_date = $_POST['from_date'];
@@ -292,7 +292,7 @@ if (isset($_POST['submit2'])) {
     $every = $_POST['every'];
 
     $time = $_POST['time'];
-    if (!isset($route_id, $train_id, $first_fee, $second_fee, $date, $time)) {
+    if (!isset($route_id, $bus_id, $first_fee, $second_fee, $date, $time)) {
         alert("Fill Form Properly!");
     } else {
 
@@ -305,16 +305,16 @@ if (isset($_POST['submit2'])) {
         if ($every == 'Day') {
             for ($i = strtotime($startDate); $i <= strtotime($endDate); $i = strtotime('+1 day', $i)) {
                 $date = date('d-m-Y', $i);
-                $ins = $conn->prepare("INSERT INTO `schedule`(`train_id`, `route_id`, `date`, `time`, `first_fee`, `second_fee`) VALUES (?,?,?,?,?,?)");
-                $ins->bind_param("iissii", $train_id, $route_id, $date, $time, $first_fee, $second_fee);
+                $ins = $conn->prepare("INSERT INTO `schedule`(`bus_id`, `route_id`, `date`, `time`, `first_fee`, `second_fee`) VALUES (?,?,?,?,?,?)");
+                $ins->bind_param("iissii", $bus_id, $route_id, $date, $time, $first_fee, $second_fee);
                 $ins->execute();
             }
         } else {
             for ($i = strtotime($every, strtotime($startDate)); $i <= strtotime($endDate); $i = strtotime('+1 week', $i)) {
                 $date = date('d-m-Y', $i);
 
-                $ins = $conn->prepare("INSERT INTO `schedule`(`train_id`, `route_id`, `date`, `time`, `first_fee`, `second_fee`) VALUES (?,?,?,?,?,?)");
-                $ins->bind_param("iissii", $train_id, $route_id, $date, $time, $first_fee, $second_fee);
+                $ins = $conn->prepare("INSERT INTO `schedule`(`bus_id`, `route_id`, `date`, `time`, `first_fee`, `second_fee`) VALUES (?,?,?,?,?,?)");
+                $ins->bind_param("iissii", $bus_id, $route_id, $date, $time, $first_fee, $second_fee);
                 $ins->execute();
             }
         }
@@ -328,18 +328,18 @@ if (isset($_POST['submit2'])) {
 
 if (isset($_POST['edit'])) {
     $route_id = $_POST['route_id'];
-    $train_id = $_POST['train_id'];
+    $bus_id = $_POST['bus_id'];
     $first_fee = $_POST['first_fee'];
     $second_fee = $_POST['second_fee'];
     $date = $_POST['date'];
     $time = $_POST['time'];
     $id = $_POST['id'];
-    if (!isset($route_id, $train_id, $first_fee, $second_fee, $date, $time)) {
+    if (!isset($route_id, $bus_id, $first_fee, $second_fee, $date, $time)) {
         alert("Fill Form Properly!");
     } else {
         $conn = connect();
-        $ins = $conn->prepare("UPDATE `schedule` SET `train_id`=?,`route_id`=?,`date`=?,`time`=?,`first_fee`=?,`second_fee`=? WHERE id = ?");
-        $ins->bind_param("iissiii", $train_id, $route_id, $date, $time, $first_fee, $second_fee, $id);
+        $ins = $conn->prepare("UPDATE `schedule` SET `bus_id`=?,`route_id`=?,`date`=?,`time`=?,`first_fee`=?,`second_fee`=? WHERE id = ?");
+        $ins->bind_param("iissiii", $bus_id, $route_id, $date, $time, $first_fee, $second_fee, $id);
         $ins->execute();
         alert("Schedule Modified!");
         load($_SERVER['PHP_SELF'] . "$me");

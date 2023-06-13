@@ -84,7 +84,7 @@ $me = "?page=$source";
                                                     <form action="" method="post">
                                                         <input type="hidden" class="form-control" name="id"
                                                             value="<?php echo $id ?>" required id="">
-                                                        <p>Train Name : <input type="text" class="form-control"
+                                                        <p>Bus Name : <input type="text" class="form-control"
                                                                 name="name" value="<?php echo $fetch['name'] ?>"
                                                                 required minlength="3" id=""></p>
                                                         <p>First Class Capacity : <input type="number" min='0'
@@ -99,7 +99,7 @@ $me = "?page=$source";
                                                         </p>
                                                         <p>
 
-                                                            <input class="btn btn-info" type="submit" value="Edit Train"
+                                                            <input class="btn btn-info" type="submit" value="Edit Bus"
                                                                 name='edit'>
                                                         </p>
                                                     </form>
@@ -136,7 +136,7 @@ $me = "?page=$source";
     <div class="modal-dialog modal-lg">
         <div class="modal-content" align="center">
             <div class="modal-header">
-                <h4 class="modal-title">Add New Train &#128646;
+                <h4 class="modal-title">Add New Bus &#128646;
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -147,7 +147,7 @@ $me = "?page=$source";
 
                     <table class="table table-bordered">
                         <tr>
-                            <th>Train Name</th>
+                            <th>Bus Name</th>
                             <td><input type="text" class="form-control" name="name" required minlength="3" id=""></td>
                         </tr>
                         <tr>
@@ -162,7 +162,7 @@ $me = "?page=$source";
                         <tr>
                             <td colspan="2">
 
-                                <input class="btn btn-info" type="submit" value="Add Train" name='submit'>
+                                <input class="btn btn-info" type="submit" value="Add Bus" name='submit'>
                             </td>
                         </tr>
                     </table>
@@ -191,12 +191,12 @@ if (isset($_POST['submit'])) {
         //Check if train exists
         $check = $conn->query("SELECT * FROM train WHERE name = '$name' ")->num_rows;
         if ($check) {
-            alert("Train exists");
+            alert("Bus exists");
         } else {
             $ins = $conn->prepare("INSERT INTO train (name, first_seat, second_seat) VALUES (?,?,?)");
             $ins->bind_param("sss", $name, $first_seat, $second_seat);
             $ins->execute();
-            alert("Train Added!");
+            alert("Bus Added!");
             load($_SERVER['PHP_SELF'] . "$me");
         }
     }
@@ -214,12 +214,12 @@ if (isset($_POST['edit'])) {
         //Check if train exists
         $check = $conn->query("SELECT * FROM train WHERE name = '$name' ")->num_rows;
         if ($check == 2) {
-            alert("Train name exists");
+            alert("Bus name exists");
         } else {
             $ins = $conn->prepare("UPDATE train SET name = ?, first_seat = ?, second_seat = ? WHERE id = ?");
             $ins->bind_param("sssi", $name, $first_seat, $second_seat, $id);
             $ins->execute();
-            alert("Train Modified!");
+            alert("Busfied!");
             load($_SERVER['PHP_SELF'] . "$me");
         }
     }
@@ -229,10 +229,10 @@ if (isset($_POST['del_train'])) {
     $con = connect();
     $conn = $con->query("DELETE FROM train WHERE id = '" . $_POST['del_train'] . "'");
     if ($con->affected_rows < 1) {
-        alert("Train Could Not Be Deleted. This Train Has Been Tied To Another Data!");
+        alert("Bus Could Not Be Deleted. This Bus Has Been Tied To Another Data!");
         load($_SERVER['PHP_SELF'] . "$me");
     } else {
-        alert("Train Deleted!");
+        alert("Bus Deleted!");
         load($_SERVER['PHP_SELF'] . "$me");
     }
 }
